@@ -6,9 +6,9 @@ class UserLocation{
   bool check;
 
   static Geolocator geo = new Geolocator();
-  static Future getLocation({@required BuildContext context}) async {
+
+  static Future getLocation() async {
     if(geo == null) geo = new Geolocator();
-    await permissionCheck(context: context);
     final Position _position = await geo.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     final Map<String, num> _result = {'lat':_position.latitude, 'lon':_position.longitude};
     return _result;
@@ -16,6 +16,7 @@ class UserLocation{
 
   static Future<bool> permissionCheck({@required BuildContext context}) async{
     bool check = false;
+    Geolocator geo = UserLocation.geo;
     if(geo == null) geo = new Geolocator();
     GeolocationStatus status = await geo.checkGeolocationPermissionStatus();
     if(status == GeolocationStatus.restricted ||status == GeolocationStatus.granted){
@@ -28,6 +29,21 @@ class UserLocation{
     }
     return check;
   }
+
+//  static Future<bool> permissionCheck({@required BuildContext context}) async{
+//    bool check = false;
+//    if(geo == null) geo = new Geolocator();
+//    GeolocationStatus status = await geo.checkGeolocationPermissionStatus();
+//    if(status == GeolocationStatus.restricted ||status == GeolocationStatus.granted){
+//      check = true;
+//    }
+//    if(!check){
+//      await showPermissionCheck(context: context);
+//      await Permission.locationAlways.request();
+//      await permissionCheck(context: context);
+//    }
+//    return check;
+//  }
 
   static Future<void> showPermissionCheck({@required BuildContext context}) async{
     return await showDialog(

@@ -5,10 +5,12 @@
 안드로이드 및 아이폰에서 동시에 적용/테스트 가능합니다.
 
 ## 일정
- - 8/19 (1) : GeoLocation 위치
- - 8/18 (1) : webRTC(And : Intent Chrome / IOS : Safari 일부 지원)
- - 8/17 (1) : FCM 코드 배포
- - 8/15 (1) : FCM And & IOS 과 채팅 적용 예정
+ - 8/21 : 안드로이드 포그라운드(foreground_service / notification background)
+ - 8/20 : GraphQL HTTP(s) || GraphQL 패키지 사용
+ - 8/19 : GeoLocation 위치
+ - 8/18 : webRTC(And : Intent Chrome / IOS : Safari 일부 지원)
+ - 8/17 : FCM 코드 배포
+ - 8/15 : FCM And & IOS 과 채팅 적용 예정
  - 8/14 (1) : Local DB SharedPreferences & 카카오 로그인 적용(임시 구현)
  - 8/13 (2) : 카카오톡 로그인(토큰까지 구현 중) & WebView 적용
  - 8/13 (1) : Local notification 로직 및 Socket 채팅 알림으로 사용(채팅 페이지 및 메인 페이지에서 알림)
@@ -28,9 +30,9 @@
  (LocalNotification은 앱이 활성화 상태에서만 동작하므로 종료시에도 작업하기 위해서는 FCM 사용해야합니다, And/IOS 테스크까지는 동작하지만 완전 종료(백그라운드)에서는 동작하지 않습니다)
  - [x] FCM Push MSG : And & IOS 적용 코드 배포 / 여러 설정 및 부수적인 작업이 필요합니다
  - [x] webRtc를 이용한 영상 통화,채팅 (구현 예정)
- - [ ] Geolocation : 위치(위경도) / IOS 기기 테스트
- - [ ] foreground_service : notification background(예정)
+ - [x] Geolocation : 위치(위경도) 한번 & 지속 확인 / IOS 기기 테스트
+ - [x] GraphQL : HTTP(s) || GraphQL 패키지 사용
+ - [x] foreground_service : notification background(안드로이드만 사용 가능 / apk --debug 가능)
  - [ ] 오디오 또는 비디오 스트리밍 : (예정)
- - [ ] GraphQL : (예정) express-graphQL
  - [ ] 예외 처리 : (예정)
  - [ ] 배포 된 express 서버를 이용하여 마켓 출시(구글 및 애플) : 배포를 희망하는 플랫폼의 개발자 계정을 구매해주셔야 합니다

@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:io';
+import 'package:basicflutter/main.dart';
 import 'package:basicflutter/providers/LocalNotiProvider.dart';
 import 'package:basicflutter/providers/LoginCheckProvider.dart';
 import 'package:basicflutter/providers/SocketProvider.dart';
@@ -7,6 +10,7 @@ import 'package:basicflutter/repo/LocalNotification.dart';
 import 'package:basicflutter/repo/SharedPref.dart';
 import 'package:basicflutter/repo/UserLocation.dart';
 import 'package:basicflutter/views/CamPage.dart';
+import 'package:basicflutter/views/GraphQLPage.dart';
 import 'package:basicflutter/views/ImageFilePage.dart';
 import 'package:basicflutter/views/SQLPage.dart';
 import 'package:basicflutter/views/SQflitePage.dart';
@@ -14,6 +18,7 @@ import 'package:basicflutter/views/SocketChatPage.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:foreground_service/foreground_service.dart';
 import 'package:geolocator/geolocator.dart';
 import 'dart:math' as math;
 import 'package:provider/provider.dart';
@@ -29,6 +34,7 @@ class _MyAppState extends State<MyApp> {
   LoginCheckProvider _lc;
   FirebaseMessaging _firebaseMessaging;
   String fcmToken = "";
+  bool foregroundCheck = false;
 
   @override
   void initState() {
@@ -48,8 +54,8 @@ class _MyAppState extends State<MyApp> {
         return;
       })
       .then((_) async{
-        Map<String, num> _location = await UserLocation.getLocation(context: context);
-    });
+        Map<String, num> _location = await UserLocation.getLocation();
+      });
     super.initState();
   }
 
@@ -63,6 +69,7 @@ class _MyAppState extends State<MyApp> {
         return;
       });
     if(_lc == null) _lc = Provider.of<LoginCheckProvider>(context);
+    UserLocation.permissionCheck(context:context);
     return Scaffold(
       appBar: AppBar(
         title: Text("with Node.js"),
@@ -108,10 +115,12 @@ class _MyAppState extends State<MyApp> {
             Container(
               margin: EdgeInsets.all(10.0),
               child: StreamBuilder(
-                stream: UserLocation.geo.getPositionStream(),
+                stream: UserLocation.geo.getPositionStream().timeout(Duration(seconds: 4), onTimeout:(EventSink<Position> po) => po.add(new Position(latitude: 0, longitude: 0))),
                 builder: (context, AsyncSnapshot<Position> snap){
                   if(!snap.hasData) return Container(width:100.0, height:100.0, child: CircularProgressIndicator());
-                  return Text("lat : ${snap.data.latitude} / long : ${snap.data.longitude}");
+                  if(snap.hasError) return Container(child: Text("ERR"),);
+                  if(snap.data.latitude == 0 && snap.data.longitude == 0) return Container(child: Text("위치를 불러 올 수 없습니다\n(앱 권한 또는 고객센터를 통해 기종을 확인해주세요)"),);
+                  return Text("내 위치\nlat : ${snap.data.latitude} / long : ${snap.data.longitude}");
                 },
               ),
             ),
@@ -199,9 +208,32 @@ class _MyAppState extends State<MyApp> {
                 )
               ),
             ),
+            MaterialButton(
+              minWidth: MediaQuery.of(context).size.width*0.5,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+              color: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
+              textColor: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
+              child: Text("GraphQL Connect"),
+              onPressed: () async => Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => new GraphQLPage()
+                )
+              ),
+            ),
           ],
         ),
       ),
+      floatingActionButton: Platform.isAndroid
+        ? FloatingActionButton(
+            child: Icon(this.foregroundCheck ? Icons.play_arrow : Icons.stop),
+            onPressed: () async{
+              this.foregroundCheck ? await maybeStartFGS() : await ForegroundService.stopForegroundService();
+              setState(() {
+                this.foregroundCheck = !this.foregroundCheck;
+              });
+            },
+          )
+        : null
     );
   }
 }

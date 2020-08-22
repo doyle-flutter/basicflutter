@@ -172,7 +172,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   camera: a0ca5080336f7af47b88436e5e26da3dee5568f0
   Firebase: 210f41ca352067d83b1ba4fd2e7fb49a0c017397
-  firebase_messaging: 21344b3b3a7d9d325d63a70e3750c0c798fe1e03
+  firebase_messaging: b8543d17dd9825f4f24a585477f77db103e5228e
   FirebaseAnalytics: a299a86ef70fcc6aa011418bc65a7e101fb9636c
   FirebaseCore: 9a41e2de78fef10f63cee30ab10e2945266bc1fc
   FirebaseCoreDiagnostics: 7535fe695737f8c5b350584292a70b7f8ff0357b

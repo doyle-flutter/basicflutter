@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:camera/camera.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -37,15 +38,15 @@ class _CamPageState extends State<CamPage> {
   Widget _cameraPreviewWidget({@required BuildContext context}) => (controller == null || !controller.value.isInitialized)
       ? Center(child: CircularProgressIndicator())
       : Stack(
-    children: <Widget>[
-      Positioned(
+      children: <Widget>[
+        Positioned(
           top: 0,
           bottom: 0,
           right: 0,
           left: 0,
           child: CameraPreview(controller)
-      ),
-      Positioned(
+        ),
+        Positioned(
           width: MediaQuery.of(context).size.width,
           bottom: MediaQuery.of(context).size.height*0.2,
           child: Row(
@@ -68,11 +69,11 @@ class _CamPageState extends State<CamPage> {
                 backgroundColor: Colors.grey,
                 child: Icon(Icons.swap_horizontal_circle),
                 onPressed:_onSwitchCamera,
-              )
+              ),
             ],
           )
-      ),
-      _thumbnailWidget(context: context)
+        ),
+        _thumbnailWidget(context: context)
     ],
   );
 
@@ -82,12 +83,12 @@ class _CamPageState extends State<CamPage> {
     child: Container(
       alignment: Alignment.center,
       child: imagePath == null
-          ? SizedBox()
-          : SizedBox(
-        child: Image.file(File(imagePath)),
-        width: 100.0,
-        height: 100.0,
-      ),
+        ? SizedBox()
+        : SizedBox(
+            child: Image.file(File(imagePath)),
+            width: 100.0,
+            height: 100.0,
+          ),
     ),
   );
 
@@ -137,25 +138,18 @@ class _CamPageState extends State<CamPage> {
 
   void _onCapturePressed() async{
 
-    await controller.startImageStream((CameraImage image){
-      print(image.format.toString());
-      print(image.format.raw.toString());
+    String _filePath = await _takePicture();
+    if(_filePath.isEmpty) throw "err";
+    imagePath = _filePath;
+    File _image = File(_filePath);
+    String result = 'data:image/jpg;base64,' + base64Encode(_image.readAsBytesSync());
 
-    })
-    .then((_) async => Future.delayed(Duration(seconds: 1), () async => await controller.stopImageStream()));
-
-//    String _filePath = await _takePicture();
-//    if(_filePath.isEmpty) throw "err";
-//    imagePath = _filePath;
-//    File _image = File(_filePath);
-//    String result = 'data:image/jpg;base64,' + base64Encode(_image.readAsBytesSync());
-
-//    await http.post(
-//        "http://127.0.0.1:8808/ph",
-//        body: {
-//          "photo": result.toString()
-//        }
-//    );
+    await http.post(
+        "http://127.0.0.1:8808/ph",
+        body: {
+          "photo": result.toString()
+        }
+    );
 //    await socketIO.sendMessage(
 //        'send_message', json.encode(
 //        {
