@@ -15,6 +15,7 @@ import 'package:basicflutter/views/ImageFilePage.dart';
 import 'package:basicflutter/views/SQLPage.dart';
 import 'package:basicflutter/views/SQflitePage.dart';
 import 'package:basicflutter/views/SocketChatPage.dart';
+import 'package:basicflutter/views/StreamingPage.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -217,6 +218,18 @@ class _MyAppState extends State<MyApp> {
               onPressed: () async => Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => new GraphQLPage()
+                )
+              ),
+            ),
+            MaterialButton(
+              minWidth: MediaQuery.of(context).size.width*0.5,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+              color: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
+              textColor: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
+              child: Text("Streaming"),
+              onPressed: () async => Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => new StreamingPage()
                 )
               ),
             ),

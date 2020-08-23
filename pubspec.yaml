@@ -46,6 +46,7 @@ dependencies:
   permission_handler: ^5.0.1+1
   image: ^2.1.14
   graphql_flutter: ^3.0.0
+  url_audio_stream: ^1.0.0+3
 
 
 dev_dependencies:
