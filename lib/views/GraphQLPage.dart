@@ -16,7 +16,7 @@ class _GraphQLPageState extends State<GraphQLPage> {
   @override
   void initState() {
     Future.microtask(() async{
-      String query = "{hello(targetId:1){ id title}}";
+      String query = "{hello(targetId:31){ id title}}";
       http.Response _res = await http.get("${ConnectNode.END_POINT}/graphqlserver/data?query=$query");
       var _result = json.decode(_res.body);
       print(_result);
@@ -43,7 +43,7 @@ class _GraphQLPageState extends State<GraphQLPage> {
     final AuthLink authLink = AuthLink(getToken: () async => 'Bearer <YOUR_PERSONAL_ACCESS_TOKEN>',);
     final Link link = authLink.concat(httpLink);
 
-    String readRepositories = "query{hello(targetId:1){id title}}";
+    String readRepositories = "query{hello(targetId:31){id title}}";
 
     if(data == null) return Center(child: CircularProgressIndicator(),);
     return Container(
