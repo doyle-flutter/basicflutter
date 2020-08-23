@@ -1,14 +1,14 @@
 # basicflutter
 
 해당 Flutter 플러터 코드는 basicexpress( https://github.com/doyle-flutter/basicexpress )와 함께 보셔야 합니다.
-코드에 충분한 의도를 담아 표현하고 싶었지만 빠른 기간내 업로드하는 목표로 작업하고 있기 때문에 코드 레벨이 조금 부족할 수 있는 점 미리 양해부탁드립니다.
-안드로이드 및 아이폰에서 동시에 적용/테스트 가능합니다.
+8월 내 모든 내용을 업로드하는 목표로 작업하고 있습니다, 초급 ~ 중급 대상이므로 고급이상의 코더분들에겐 코드 레벨이 조금 부족할 수 있으므로 관련 로직만 참고해주시면 될 것 같습니다.
+모든 내용 안드로이드 및 아이폰(에뮬레이터 및 실제 기기)에서 동시에 적용/테스트 가능합니다.
 
 ## 일정
  - 8/21 : 안드로이드 포그라운드(foreground_service / notification background)
- - 8/20 : GraphQL HTTP(s) || GraphQL 패키지 사용
- - 8/19 : GeoLocation 위치
- - 8/18 : webRTC(And : Intent Chrome / IOS : Safari 일부 지원)
+ - 8/20 : GraphQL HTTP(s) || GraphQL 패키지 사용 둘 다 적용 가능
+ - 8/19 : GeoLocation 위치(IOS는 실제 기기에서만 가능하므로 가상 기기에서는 예외처리 구현)
+ - 8/18 : webRTC(And : Chrome / IOS : Safari 일부 지원)
  - 8/17 : FCM 코드 배포
  - 8/15 : FCM And & IOS 과 채팅 적용 예정
  - 8/14 (1) : Local DB SharedPreferences & 카카오 로그인 적용(임시 구현)
@@ -29,7 +29,7 @@
  - [x] Local Notification 구현 : Socket Chat과 연결하였습니다
  (LocalNotification은 앱이 활성화 상태에서만 동작하므로 종료시에도 작업하기 위해서는 FCM 사용해야합니다, And/IOS 테스크까지는 동작하지만 완전 종료(백그라운드)에서는 동작하지 않습니다)
  - [x] FCM Push MSG : And & IOS 적용 코드 배포 / 여러 설정 및 부수적인 작업이 필요합니다
- - [x] webRtc를 이용한 영상 통화,채팅 (구현 예정)
+ - [x] webRtc를 이용한 영상 통화,채팅(안드로이드 가능 / IOS 사파리에서 일부 가능)
  - [x] Geolocation : 위치(위경도) 한번 & 지속 확인 / IOS 기기 테스트
  - [x] GraphQL : HTTP(s) || GraphQL 패키지 사용
  - [x] foreground_service : notification background(안드로이드만 사용 가능 / apk --debug 가능)
