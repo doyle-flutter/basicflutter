@@ -31,11 +31,8 @@ void main() async{
               create: (_) => new SQLProvider(),),
             ChangeNotifierProvider<SocketProvider>(
               create: (_) => new SocketProvider(),),
-            ChangeNotifierProvider<SQFliteProvider>(create: (_) =>
-            new SQFliteProvider(dbName: "mydb",
-                tableName: "tb",
-                columnTitle: "title",
-                columnDes: "des"),),
+            ChangeNotifierProvider<SQFliteProvider>(create: (_)
+              => new SQFliteProvider(dbName: "mydb", tableName: "tb", columnTitle: "title", columnDes: "des"),),
             ChangeNotifierProvider<MultipartImgFilesProvider>(
               create: (_) => new MultipartImgFilesProvider(),),
             ChangeNotifierProvider<LoginCheckProvider>(
@@ -79,9 +76,7 @@ Future<void> foregroundServiceFunction() async{
   }
   if(lat.split(".")[1][2] != userPosition['lat'].toString().split(".")[1][2] || lon.split(".")[1][2] != userPosition['lon'].toString().split(".")[1][2]){
     ForegroundService.notification.setText("확인해주세요 :)");
-    if (await Vibration.hasVibrator()) {
-      Vibration.vibrate(duration: 2000);
-    }
+    if (await Vibration.hasVibrator()) Vibration.vibrate(duration: 2000);
     await _pref.setString(latKey, userPosition['lat'].toString());
     await _pref.setString(lonKey, userPosition['lon'].toString());
     return;

@@ -1,12 +1,15 @@
 import 'package:basicflutter/providers/SQLProvider.dart';
+import 'package:basicflutter/views/LoadingPage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class SQLPage extends StatelessWidget {
   SQLProvider sqlProvider;
   @override
   Widget build(BuildContext context) {
-    sqlProvider = Provider.of<SQLProvider>(context)..init();
+    sqlProvider = Provider.of<SQLProvider>(context);
+    if(sqlProvider == null) return new LoadingPage();
     return Scaffold(
       appBar: AppBar(
         title: Text("SQLPage"),

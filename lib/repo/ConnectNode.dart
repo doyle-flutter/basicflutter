@@ -47,7 +47,7 @@ class ConnectNode{
         filename: "flutterImg${DateTime.now().millisecond}.png",
       )
     );
-    http.StreamedResponse _res = await _request.send();
+    await _request.send();
     return;
   }
   static Future<void> fetchMultipartArr({@required String path, @required List<File> files}) async{
@@ -62,7 +62,7 @@ class ConnectNode{
           )
       );
     });
-    http.StreamedResponse _res = await _request.send();
+    await _request.send();
     return;
   }
 }

@@ -10,7 +10,11 @@ class SQFliteProvider with ChangeNotifier{
   set result(newData) => throw "ERR !";
 
   SQFliteProvider({@required String dbName, @required String tableName, @required String columnTitle, @required String columnDes}){
-    _sqflite = new LocalSqflite(dbName: dbName, tableName: tableName, columnTitle: columnTitle, columnDes: columnDes);
+    Future.microtask(() async {
+      _sqflite = new LocalSqflite(dbName: dbName, tableName: tableName, columnTitle: columnTitle, columnDes: columnDes);
+      await dataGet();
+    });
+
   }
 
   Future<void> dataGet() async{

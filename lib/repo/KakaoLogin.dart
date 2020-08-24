@@ -1,15 +1,15 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
-//import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
-import 'package:http/http.dart' as http;
 import 'package:webview_flutter/webview_flutter.dart';
 
 abstract class LoginLogic{
   String authKey;
   String connectHost;
-  Future login(){}
-  Future logout(){}
+  // ignore: missing_return
+  Future<Map<String, dynamic>> login(){}
+  // ignore: missing_return
+  Future<Map<String, dynamic>> logout(){}
 }
 
 class KakaoLogin implements LoginLogic{
@@ -29,49 +29,34 @@ class KakaoLogin implements LoginLogic{
   Future<Map<String, dynamic>> login({@required BuildContext context}) async{
     final String url = this.connectUrl();
     final Completer<WebViewController> _c = Completer<WebViewController>();
-    print(url);
     var _result;
     try{
        _result = await Navigator.of(context).push(
           MaterialPageRoute(
-//        builder: (context) => WebviewScaffold(
-//          url: url,
-//          withJavascript: true,
-//          javascriptChannels: Set.of([
-//              JavascriptChannel(
-//                name: 'james',
-//                onMessageReceived: (JavascriptMessage msg) async => Navigator.of(context).pop(msg?.message ?? null)
-//              ),
-//          ]),
-//          appBar: AppBar(
-//            backgroundColor: Colors.white,
-//            elevation: 0,
-//          ),
-//        )
-              builder: (context) => Scaffold(
-                body: Builder(
-                  builder: (context) => WebView(
-                    initialUrl: url,
-                    onWebViewCreated: (WebViewController webc){
-                      _c.complete(webc);
-                    },
-                    onPageStarted: (String url) {
-                      print('Page started loading: $url');
-                    },
-                    onPageFinished: (String url) {
-                      print('Page finished loading: $url');
-                    },
-                    javascriptMode: JavascriptMode.unrestricted,
-                    javascriptChannels: <JavascriptChannel>[
-                      JavascriptChannel(
-                          name: 'james',
-                          onMessageReceived: (JavascriptMessage msg) async => Navigator.of(context).pop(msg.message)
-                      ),
-                    ].toSet(),
-                  ),
+            builder: (context) => Scaffold(
+              body: Builder(
+                builder: (context) => WebView(
+                  initialUrl: url,
+                  onWebViewCreated: (WebViewController webc){
+                    _c.complete(webc);
+                  },
+                  onPageStarted: (String url) {
+                    print('Page started loading: $url');
+                  },
+                  onPageFinished: (String url) {
+                    print('Page finished loading: $url');
+                  },
+                  javascriptMode: JavascriptMode.unrestricted,
+                  javascriptChannels: <JavascriptChannel>[
+                    JavascriptChannel(
+                        name: 'james',
+                        onMessageReceived: (JavascriptMessage msg) async => Navigator.of(context).pop(msg.message)
+                    ),
+                  ].toSet(),
                 ),
-              )
-          )
+              ),
+            )
+        )
       );
     }
     catch(e){
@@ -83,10 +68,9 @@ class KakaoLogin implements LoginLogic{
   }
   
   @override
-  Future logout({@required BuildContext context, @required String at}) async{
+  Future<Map<String, dynamic>> logout({@required BuildContext context, @required String at}) async{
     String url = connectLogoutUrl(at: at);
     final Completer<WebViewController> _c = Completer<WebViewController>();
-
     String _result = await Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => Scaffold(
@@ -115,7 +99,6 @@ class KakaoLogin implements LoginLogic{
           )
         )
     );
-    print("rESULT : ${_result}");
     if(_result == null) return null;
     Map<String, dynamic> _re = json.decode(_result);
     return _re;

@@ -2,7 +2,6 @@ import 'package:basicflutter/models/KakaoLoginModel.dart';
 import 'package:basicflutter/providers/LoginCheckProvider.dart';
 import 'package:basicflutter/repo/KakaoLogin.dart';
 import 'package:basicflutter/repo/SharedPref.dart';
-import 'package:basicflutter/views/MyApp.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

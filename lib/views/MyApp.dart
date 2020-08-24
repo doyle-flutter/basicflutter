@@ -51,12 +51,10 @@ class _MyAppState extends State<MyApp> {
     })
       .then((_) async{
         fcmToken = await _.getToken();
-        bool result = await ConnectNode.fetchPost<bool>(path: '/fcm/token/save', body: {"token":fcmToken});
+        await ConnectNode.fetchPost<bool>(path: '/fcm/token/save', body: {"token":fcmToken});
         return;
       })
-      .then((_) async{
-        Map<String, num> _location = await UserLocation.getLocation();
-      });
+      .then((_) async => await UserLocation.getLocation());
     super.initState();
   }
 
@@ -93,7 +91,7 @@ class _MyAppState extends State<MyApp> {
                         RaisedButton(
                           child: Text("로그아웃"),
                           onPressed: () async{
-                            Map<String, dynamic> result = await new KakaoLogin().logout(context: context,at: await SharedPref.getAToken());
+                            await new KakaoLogin().logout(context: context,at: await SharedPref.getAToken());
                             await _lc.reset();
                             Navigator.of(context).pop();
                           },
