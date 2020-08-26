@@ -160,7 +160,7 @@ class _MyAppState extends State<MyApp> {
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
               color: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
               textColor: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
-              child: Text("Image File Page\n(IOS : 기기 테스트)"),
+              child: Text("Image & Video\n(IOS : 기기 테스트)"),
               onPressed: () => Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => new ImageFilePage()
                 )
@@ -176,20 +176,20 @@ class _MyAppState extends State<MyApp> {
                 bool _check;
                 if(fcmToken.isEmpty){
                   _check = await showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                        title: Text("토큰을 읽어볼 수 없습니다, 재부팅 또는 불러오기 버튼을 이용해주세요"),
-                        actions: [
-                          FlatButton(
-                            child: Text("다시 불러오기"),
-                            onPressed: ()async{
-                              this.fcmToken = await _firebaseMessaging.getToken();
-                              Navigator.of(context).pop(true);
-                            },
-                          )
-                        ],
-                      )
-                  )??false;
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: Text("토큰을 읽어볼 수 없습니다, 재부팅 또는 불러오기 버튼을 이용해주세요"),
+                      actions: [
+                        FlatButton(
+                          child: Text("다시 불러오기"),
+                          onPressed: ()async{
+                            this.fcmToken = await _firebaseMessaging.getToken();
+                            Navigator.of(context).pop(true);
+                          },
+                        )
+                      ],
+                    )
+                  ) ?? false;
                   if(!_check) return;
                 }
                 await ConnectNode.fetchPost(path: '/fcm/send', body: {'title': "Hi !", 'body':'IOS !', 'token':fcmToken});
@@ -200,7 +200,7 @@ class _MyAppState extends State<MyApp> {
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
               color: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
               textColor: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
-              child: Text("Camera View"),
+              child: Text("Camera View\n(IOS : 기기 테스트)"),
               onPressed: () async => Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => new CamPage()
@@ -224,7 +224,7 @@ class _MyAppState extends State<MyApp> {
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
               color: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
               textColor: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
-              child: Text("Streaming"),
+              child: Text("Audio Streaming"),
               onPressed: () async => Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => new StreamingPage()

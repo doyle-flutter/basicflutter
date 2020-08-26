@@ -5,6 +5,7 @@
 모든 내용 안드로이드 및 아이폰(에뮬레이터 및 실제 기기)에서 동시에 적용/테스트 가능합니다.
 
 ## 일정
+ - 8/26 : express multer를 이용한 영상 업로드 / 사진첩(영상) 활용
  - 8/23 : Streaming MP3 안드로이드 및 아이폰 테스트 완료
  - 8/21 : 안드로이드 포그라운드(foreground_service / notification background)
  - 8/20 : GraphQL HTTP(s) || GraphQL 패키지 사용 둘 다 적용 가능
@@ -35,5 +36,5 @@
  - [x] GraphQL : HTTP(s) || GraphQL 패키지 사용
  - [x] foreground_service : notification background(안드로이드만 사용 가능 / apk --debug 가능)
  - [x] 오디오 또는 비디오 스트리밍 : MP3 안드로이드 및 아이폰 테스트 완료
- - [ ] 예외 처리 : (예정)
+ - [x] 예외 처리 : 일부
  - [ ] 배포 된 express 서버를 이용하여 마켓 출시(구글 및 애플) : 배포를 희망하는 플랫폼의 개발자 계정을 구매해주셔야 합니다

@@ -119,7 +119,36 @@ class ImageFilePage extends StatelessWidget {
                               ),
                             )
                         ),
-                      )
+                      ),
+                  Column(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border(top: BorderSide(color: Colors.red)),
+                        ),
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width*0.50,
+                        padding: EdgeInsets.only(top: 20.0),
+                        child: RaisedButton(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Icon(Icons.camera),
+                              Text("비디오선택"),
+                            ],
+                          ),
+                          color: Colors.white,
+                          onPressed: () async{
+                            PickedFile f = await ImagePicker().getVideo(source: ImageSource.gallery);
+                            if(f == null) return;
+                            File upf = File(f.path);
+                            return await ConnectNode.fetchMultipartFv(path: '/fpage/videos', file: upf);
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),

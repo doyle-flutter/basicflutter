@@ -65,4 +65,17 @@ class ConnectNode{
     await _request.send();
     return;
   }
+  static Future<void> fetchMultipartFv({@required String path, @required File file}) async{
+    http.MultipartRequest _request = http.MultipartRequest("POST", Uri.parse("$END_POINT$path"));
+    _request.files.add(
+        new http.MultipartFile(
+          'fv',
+          file.readAsBytes().asStream(),
+          file.lengthSync(),
+          filename: "flutterImg${DateTime.now().millisecond}.mp4",
+        )
+    );
+    await _request.send();
+    return;
+  }
 }
