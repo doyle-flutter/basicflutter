@@ -16,6 +16,7 @@ import 'package:basicflutter/views/SQLPage.dart';
 import 'package:basicflutter/views/SQflitePage.dart';
 import 'package:basicflutter/views/SocketChatPage.dart';
 import 'package:basicflutter/views/StreamingPage.dart';
+import 'package:basicflutter/views/VuePage.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -108,130 +109,156 @@ class _MyAppState extends State<MyApp> {
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              margin: EdgeInsets.all(10.0),
-              child: StreamBuilder(
-                stream: UserLocation.geo.getPositionStream().timeout(Duration(seconds: 4), onTimeout:(EventSink<Position> po) => po.add(new Position(latitude: 0, longitude: 0))),
-                builder: (context, AsyncSnapshot<Position> snap){
-                  if(!snap.hasData) return Container(width:100.0, height:100.0, child: CircularProgressIndicator());
-                  if(snap.hasError) return Container(child: Text("ERR"),);
-                  if(snap.data.latitude == 0 && snap.data.longitude == 0) return Container(child: Text("위치를 불러 올 수 없습니다\n(앱 권한 또는 고객센터를 통해 기종을 확인해주세요)"),);
-                  return Text("내 위치\nlat : ${snap.data.latitude} / long : ${snap.data.longitude}");
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: EdgeInsets.all(10.0),
+                child: StreamBuilder(
+                  stream: UserLocation.geo.getPositionStream().timeout(Duration(seconds: 4), onTimeout:(EventSink<Position> po) => po.add(new Position(latitude: 0, longitude: 0))),
+                  builder: (context, AsyncSnapshot<Position> snap){
+                    if(!snap.hasData) return Container(width:100.0,height:100.0,child: CircularProgressIndicator());
+                    if(snap.hasError) return Container(child: Text("ERR"),);
+                    if(snap.data.latitude == 0 && snap.data.longitude == 0) return Container(
+                      height:100.0,
+                      alignment: Alignment.centerLeft,
+                      child: Text("위치를 불러 올 수 없습니다\n(앱 권한 또는 고객센터를 통해 기종을 확인해주세요)"),
+                    );
+                    return Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 100.0,
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        "내 위치\nlat : ${snap.data.latitude} / long : ${snap.data.longitude}",
+                        textAlign: TextAlign.center,
+                      )
+                    );
+                  },
+                ),
+              ),
+              MaterialButton(
+                minWidth: MediaQuery.of(context).size.width*0.5,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+                color: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
+                textColor: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
+                child: Text("SQL Page"),
+                onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => new SQLPage())
+                ),
+              ),
+              MaterialButton(
+                minWidth: MediaQuery.of(context).size.width*0.5,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+                color: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
+                textColor: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
+                child: Text("LocalDB : SQflite Page"),
+                onPressed: () => Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => new SQflitePage()
+                  )
+                ),
+              ),
+              MaterialButton(
+                minWidth: MediaQuery.of(context).size.width*0.5,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+                color: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
+                textColor: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
+                child: Text("SocketChat Page"),
+                onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => new SocketChatPage()
+                  )
+                ),
+              ),
+              MaterialButton(
+                minWidth: MediaQuery.of(context).size.width*0.5,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+                color: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
+                textColor: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
+                child: Text("Image & Video\n(IOS : 기기 테스트)"),
+                onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => new ImageFilePage()
+                  )
+                ),
+              ),
+              MaterialButton(
+                minWidth: MediaQuery.of(context).size.width*0.5,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+                color: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
+                textColor: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
+                child: Text("Push MSG Send"),
+                onPressed: () async{
+                  bool _check;
+                  if(fcmToken.isEmpty){
+                    _check = await showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: Text("토큰을 읽어볼 수 없습니다, 재부팅 또는 불러오기 버튼을 이용해주세요"),
+                        actions: [
+                          FlatButton(
+                            child: Text("다시 불러오기"),
+                            onPressed: ()async{
+                              this.fcmToken = await _firebaseMessaging.getToken();
+                              Navigator.of(context).pop(true);
+                            },
+                          )
+                        ],
+                      )
+                    ) ?? false;
+                    if(!_check) return;
+                  }
+                  await ConnectNode.fetchPost(path: '/fcm/send', body: {'title': "Hi !", 'body':'IOS !', 'token':fcmToken});
                 },
               ),
-            ),
-            MaterialButton(
-              minWidth: MediaQuery.of(context).size.width*0.5,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-              color: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
-              textColor: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
-              child: Text("SQL Page"),
-              onPressed: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => new SQLPage())
+              MaterialButton(
+                minWidth: MediaQuery.of(context).size.width*0.5,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+                color: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
+                textColor: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
+                child: Text("Camera View\n(IOS : 기기 테스트)"),
+                onPressed: () async => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => new CamPage()
+                  )
+                ),
               ),
-            ),
-            MaterialButton(
-              minWidth: MediaQuery.of(context).size.width*0.5,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-              color: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
-              textColor: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
-              child: Text("LocalDB : SQflite Page"),
-              onPressed: () => Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => new SQflitePage()
-                )
+              MaterialButton(
+                minWidth: MediaQuery.of(context).size.width*0.5,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+                color: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
+                textColor: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
+                child: Text("GraphQL Connect"),
+                onPressed: () async => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => new GraphQLPage()
+                  )
+                ),
               ),
-            ),
-            MaterialButton(
-              minWidth: MediaQuery.of(context).size.width*0.5,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-              color: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
-              textColor: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
-              child: Text("SocketChat Page"),
-              onPressed: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => new SocketChatPage()
-                )
+              MaterialButton(
+                minWidth: MediaQuery.of(context).size.width*0.5,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+                color: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
+                textColor: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
+                child: Text("Audio Streaming"),
+                onPressed: () async => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => new StreamingPage()
+                  )
+                ),
               ),
-            ),
-            MaterialButton(
-              minWidth: MediaQuery.of(context).size.width*0.5,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-              color: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
-              textColor: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
-              child: Text("Image & Video\n(IOS : 기기 테스트)"),
-              onPressed: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => new ImageFilePage()
-                )
+              MaterialButton(
+                minWidth: MediaQuery.of(context).size.width*0.5,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+                color: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
+                textColor: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
+                child: Text("WebView : VuePage"),
+                onPressed: () async => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => new VuePage()
+                  )
+                ),
               ),
-            ),
-            MaterialButton(
-              minWidth: MediaQuery.of(context).size.width*0.5,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-              color: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
-              textColor: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
-              child: Text("Push MSG Send"),
-              onPressed: () async{
-                bool _check;
-                if(fcmToken.isEmpty){
-                  _check = await showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                      title: Text("토큰을 읽어볼 수 없습니다, 재부팅 또는 불러오기 버튼을 이용해주세요"),
-                      actions: [
-                        FlatButton(
-                          child: Text("다시 불러오기"),
-                          onPressed: ()async{
-                            this.fcmToken = await _firebaseMessaging.getToken();
-                            Navigator.of(context).pop(true);
-                          },
-                        )
-                      ],
-                    )
-                  ) ?? false;
-                  if(!_check) return;
-                }
-                await ConnectNode.fetchPost(path: '/fcm/send', body: {'title': "Hi !", 'body':'IOS !', 'token':fcmToken});
-              },
-            ),
-            MaterialButton(
-              minWidth: MediaQuery.of(context).size.width*0.5,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-              color: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
-              textColor: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
-              child: Text("Camera View\n(IOS : 기기 테스트)"),
-              onPressed: () async => Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => new CamPage()
-                )
-              ),
-            ),
-            MaterialButton(
-              minWidth: MediaQuery.of(context).size.width*0.5,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-              color: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
-              textColor: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
-              child: Text("GraphQL Connect"),
-              onPressed: () async => Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => new GraphQLPage()
-                )
-              ),
-            ),
-            MaterialButton(
-              minWidth: MediaQuery.of(context).size.width*0.5,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-              color: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
-              textColor: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
-              child: Text("Audio Streaming"),
-              onPressed: () async => Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => new StreamingPage()
-                )
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       floatingActionButton: Platform.isAndroid

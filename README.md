@@ -5,6 +5,7 @@
 모든 내용 안드로이드 및 아이폰(에뮬레이터 및 실제 기기)에서 동시에 적용/테스트 가능합니다.
 
 ## 일정
+ - 8/28 : express Vue.js 페이지 WebView 사용하여 연결
  - 8/26 : express multer를 이용한 영상 업로드 / 사진첩(영상) 활용
  - 8/23 : Streaming MP3 안드로이드 및 아이폰 테스트 완료
  - 8/21 : 안드로이드 포그라운드(foreground_service / notification background)
@@ -27,7 +28,8 @@
  - [x] socket.io를 통한 채팅 구현
  - [x] 카메라 & 앨범 사용 및 express multer를 이용한 이미지 업로드(단일 업로드 구현 / 다중 업로드 구현) ... 아이폰의 경우 실제 기기를 이용해야 카메라 접근이 수월 합니다
  - [x] SNS 로그인
- - [x] WebView( SNS와 함께 사용 )
+ - [x] WebView( SNS 로그인과 함께 사용 )
+ - [ ] WebView & Express.js / Vue.js 예정
  - [x] Local Notification 구현 : Socket Chat과 연결하였습니다
  (LocalNotification은 앱이 활성화 상태에서만 동작하므로 종료시에도 작업하기 위해서는 FCM 사용해야합니다, And/IOS 테스크까지는 동작하지만 완전 종료(백그라운드)에서는 동작하지 않습니다)
  - [x] FCM Push MSG : And & IOS 적용 코드 배포 / 여러 설정 및 부수적인 작업이 필요합니다
