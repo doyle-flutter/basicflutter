@@ -18,7 +18,7 @@ class _VuePageState extends State<VuePage> {
         title: Text("WebVue Page"),
       ),
       body: WebView(
-        initialUrl: "http://127.0.0.1:3000/vues",
+        initialUrl: "http://192.168.0.2:3000/vues",
         javascriptMode: JavascriptMode.unrestricted,
         onWebViewCreated: (WebViewController webViewController)
           => setState((){_controller = webViewController;}),

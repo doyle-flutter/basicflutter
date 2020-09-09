@@ -5,7 +5,8 @@
 모든 내용 안드로이드 및 아이폰(에뮬레이터 및 실제 기기)에서 동시에 적용/테스트 가능합니다.
 
 ## 일정
- - 8/28 : express Vue.js 페이지 WebView 사용하여 연결
+ - 9/10 : 보조 서버를 활용
+ - 8/27 : express Vue.js 페이지 WebView 활용
  - 8/26 : express multer를 이용한 영상 업로드 / 사진첩(영상) 활용
  - 8/23 : Streaming MP3 안드로이드 및 아이폰 테스트 완료
  - 8/21 : 안드로이드 포그라운드(foreground_service / notification background)
@@ -21,7 +22,7 @@
  - 8/12 (1) : SQflite CRUD 구현
 
 ## 목록
- - [x] 서버 및 데이터베이스 연결 : Node.js( https://github.com/doyle-flutter/basicexpress )
+ - [x] 서버 및 데이터베이스 연결 : Node.js(Express.js) - [서버 코드 바로가기](https://github.com/doyle-flutter/basicexpress)
  - [x] mysql CRUD 구현
  - [x] Local DB : Sqflite CRUD
  - [x] Local DB : SharedPreferences & 카카오 로그인 토큰 사용
@@ -29,7 +30,7 @@
  - [x] 카메라 & 앨범 사용 및 express multer를 이용한 이미지 업로드(단일 업로드 구현 / 다중 업로드 구현) ... 아이폰의 경우 실제 기기를 이용해야 카메라 접근이 수월 합니다
  - [x] SNS 로그인
  - [x] WebView( SNS 로그인과 함께 사용 )
- - [ ] WebView & Express.js / Vue.js 예정
+ - [x] WebView & Express.js / Vue.js
  - [x] Local Notification 구현 : Socket Chat과 연결하였습니다
  (LocalNotification은 앱이 활성화 상태에서만 동작하므로 종료시에도 작업하기 위해서는 FCM 사용해야합니다, And/IOS 테스크까지는 동작하지만 완전 종료(백그라운드)에서는 동작하지 않습니다)
  - [x] FCM Push MSG : And & IOS 적용 코드 배포 / 여러 설정 및 부수적인 작업이 필요합니다
@@ -39,4 +40,6 @@
  - [x] foreground_service : notification background(안드로이드만 사용 가능 / apk --debug 가능)
  - [x] 오디오 또는 비디오 스트리밍 : MP3 안드로이드 및 아이폰 테스트 완료
  - [x] 예외 처리 : 일부
+ - [ ] 접속 대기 구현 : 메인 서버용(Node.js)를 통한 보조 서버(Flask) 활용, 단, 여기서 '보조'는 메인 서버의 기능을 보충하는 역할
+ - [ ] ML 활용 (예정)
  - [ ] 배포 된 express 서버를 이용하여 마켓 출시(구글 및 애플) : 배포를 희망하는 플랫폼의 개발자 계정을 구매해주셔야 합니다
