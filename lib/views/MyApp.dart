@@ -10,6 +10,7 @@ import 'package:basicflutter/repo/LocalNotification.dart';
 import 'package:basicflutter/repo/SharedPref.dart';
 import 'package:basicflutter/repo/UserLocation.dart';
 import 'package:basicflutter/views/CamPage.dart';
+import 'package:basicflutter/views/ConnectMultiServer.dart';
 import 'package:basicflutter/views/GraphQLPage.dart';
 import 'package:basicflutter/views/ImageFilePage.dart';
 import 'package:basicflutter/views/SQLPage.dart';
@@ -254,6 +255,18 @@ class _MyAppState extends State<MyApp> {
                 onPressed: () async => Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => new VuePage()
+                  )
+                ),
+              ),
+              MaterialButton(
+                minWidth: MediaQuery.of(context).size.width*0.5,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+                color: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
+                textColor: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
+                child: Text("MultiServer"),
+                onPressed: () async => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => new ConnectMultiServer()
                   )
                 ),
               ),
