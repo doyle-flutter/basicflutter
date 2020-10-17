@@ -1,10 +1,11 @@
 # basicflutter
 
-해당 Flutter 플러터 코드는 basicexpress( https://github.com/doyle-flutter/basicexpress )와 함께 보셔야 합니다.
-8월 내 모든 내용을 업로드하는 목표로 작업하고 있습니다, 초급 ~ 중급 대상이므로 고급이상의 코더분들에겐 코드 레벨이 조금 부족할 수 있으므로 관련 로직만 참고해주시면 될 것 같습니다.
+해당 Flutter 플러터 코드는 basicexpress( https://github.com/doyle-flutter/basicexpress )와 basicDjangoPython(https://github.com/doyle-flutter/basicDjangoPython) 의 서버 사이드와 함께 보셔야 합니다.
+`20년이내 모든 내용을 업로드하는 목표로 작업하고 있습니다, 초급 ~ 중급 대상이므로 고급이상의 코더분들에겐 코드 레벨이 조금 부족할 수 있으므로 관련 로직만 참고해주시면 될 것 같습니다.
 모든 내용 안드로이드 및 아이폰(에뮬레이터 및 실제 기기)에서 동시에 적용/테스트 가능합니다.
 
 ## 일정
+ - 10/16~17 : Django 및 Express.js(Node.js)를 활용한 카카오 페이 직접 연동
  - 9/10 : 보조 서버를 활용
  - 8/27 : express Vue.js 페이지 WebView 활용
  - 8/26 : express multer를 이용한 영상 업로드 / 사진첩(영상) 활용
@@ -40,6 +41,7 @@
  - [x] foreground_service : notification background(안드로이드만 사용 가능 / apk --debug 가능)
  - [x] 오디오 또는 비디오 스트리밍 : MP3 안드로이드 및 아이폰 테스트 완료
  - [x] 예외 처리 : 일부
+ - [x] Django 및 Express.js(Node.js)를 활용한 카카오 페이 직접 연동
  - [ ] 접속 대기 구현 : 메인 서버용(Node.js)를 통한 보조 서버(Flask) 활용. 단, 여기서 '보조'는 메인 서버의 기능을 보충하는 역할
  - [ ] ML 활용 (예정)
  - [ ] 배포 된 express 서버를 이용하여 마켓 출시(구글 및 애플) : 배포를 희망하는 플랫폼의 개발자 계정을 구매해주셔야 합니다

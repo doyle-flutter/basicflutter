@@ -8,6 +8,7 @@ import 'package:basicflutter/providers/SQLProvider.dart';
 import 'package:basicflutter/providers/SocketProvider.dart';
 import 'package:basicflutter/repo/UserLocation.dart';
 import 'package:basicflutter/viewModels/LoginCheck.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:foreground_service/foreground_service.dart';
@@ -17,6 +18,7 @@ import 'package:vibration/vibration.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  GestureBinding.instance.resamplingEnabled = true;  // 1.22 부터 적용
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,

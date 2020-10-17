@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'package:basicflutter/main.dart';
 import 'package:basicflutter/providers/LocalNotiProvider.dart';
@@ -25,6 +26,8 @@ import 'package:foreground_service/foreground_service.dart';
 import 'package:geolocator/geolocator.dart';
 import 'dart:math' as math;
 import 'package:provider/provider.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+import 'package:http/http.dart' as http;
 
 class MyApp extends StatefulWidget {
   @override
@@ -270,6 +273,40 @@ class _MyAppState extends State<MyApp> {
                   )
                 ),
               ),
+              MaterialButton(
+                minWidth: MediaQuery.of(context).size.width*0.5,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+                color: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
+                textColor: Color.fromRGBO(math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), math.Random.secure().nextInt(255), 1.0),
+                child: Text("KakaoPay-with DJango & Express.js"),
+                onPressed: () async => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => Scaffold(
+                      appBar: AppBar(title: Text("카카오페이 직접연결++"),),
+                      body: FutureBuilder(
+                        future: logic(),
+                        builder: (context, snap){
+                          if(!snap.hasData) return Text("");
+                          return WebView(
+                            initialUrl: snap.data,
+                            javascriptMode: JavascriptMode.unrestricted,
+                            javascriptChannels: {
+                              JavascriptChannel(
+                                  name: 'jamess',
+                                  onMessageReceived: (JavascriptMessage msg){
+                                    print(msg.message);
+                                    final bool _result = json.decode(msg.message);
+                                    if(_result) return Navigator.of(context).pop();
+                                  }
+                              )
+                            },
+                          );
+                        },
+                      ),
+                    )
+                  )
+                ),
+              ),
             ],
           ),
         ),
@@ -286,5 +323,11 @@ class _MyAppState extends State<MyApp> {
           )
         : null
     );
+  }
+
+  Future<String> logic() async{
+    final String url = "http://localhost:8000/kakaopay";
+    http.Response res = await http.get(url);
+    return json.decode(res.body);
   }
 }
