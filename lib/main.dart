@@ -8,6 +8,7 @@ import 'package:basicflutter/providers/SQLProvider.dart';
 import 'package:basicflutter/providers/SocketProvider.dart';
 import 'package:basicflutter/repo/UserLocation.dart';
 import 'package:basicflutter/viewModels/LoginCheck.dart';
+import 'package:basicflutter/views/GetXPage.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,6 +16,7 @@ import 'package:foreground_service/foreground_service.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vibration/vibration.dart';
+import 'package:get/get.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,26 +26,29 @@ void main() async{
     DeviceOrientation.portraitDown,
   ]);
   if(Platform.isAndroid) await maybeStartFGS();
-  runApp(
-      MultiProvider(
-          providers: [
-            ChangeNotifierProvider<MyAppProvider>(
-              create: (_) => new MyAppProvider(),),
-            ChangeNotifierProvider<SQLProvider>(
-              create: (_) => new SQLProvider(),),
-            ChangeNotifierProvider<SocketProvider>(
-              create: (_) => new SocketProvider(),),
-            ChangeNotifierProvider<SQFliteProvider>(create: (_)
-              => new SQFliteProvider(dbName: "mydb", tableName: "tb", columnTitle: "title", columnDes: "des"),),
-            ChangeNotifierProvider<MultipartImgFilesProvider>(
-              create: (_) => new MultipartImgFilesProvider(),),
-            ChangeNotifierProvider<LoginCheckProvider>(
-              create: (_) => new LoginCheckProvider(),),
-            Provider<LocalNotiProvider>(create: (_) => new LocalNotiProvider(),)
-          ],
-          child: MaterialApp(home: LoginCheck())
-      )
-  );
+  // runApp(
+  //     MultiProvider(
+  //         providers: [
+  //           ChangeNotifierProvider<MyAppProvider>(
+  //             create: (_) => new MyAppProvider(),),
+  //           ChangeNotifierProvider<SQLProvider>(
+  //             create: (_) => new SQLProvider(),),
+  //           ChangeNotifierProvider<SocketProvider>(
+  //             create: (_) => new SocketProvider(),),
+  //           ChangeNotifierProvider<SQFliteProvider>(create: (_)
+  //             => new SQFliteProvider(dbName: "mydb", tableName: "tb", columnTitle: "title", columnDes: "des"),),
+  //           ChangeNotifierProvider<MultipartImgFilesProvider>(
+  //             create: (_) => new MultipartImgFilesProvider(),),
+  //           ChangeNotifierProvider<LoginCheckProvider>(
+  //             create: (_) => new LoginCheckProvider(),),
+  //           Provider<LocalNotiProvider>(create: (_) => new LocalNotiProvider(),)
+  //         ],
+  //         child: MaterialApp(home: LoginCheck())
+  //     )
+  // );
+
+  // GetX
+  runApp(GetMaterialApp(home: GetXPage()));
 }
 
 Future<void> maybeStartFGS() async {

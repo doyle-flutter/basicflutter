@@ -307,6 +307,35 @@ class _MyAppState extends State<MyApp> {
                   )
                 ),
               ),
+
+              TextButton(
+                child: Text("POP-UP\n-Alert + PageMove"),
+                onPressed: () async{
+                  bool result = await showDialog<bool>(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: Text("POP-UP"),
+                      actions: [
+                        TextButton(
+                          child: Text("닫기"),
+                          onPressed: () => Navigator.of(context).pop(false),
+                        )
+                      ],
+                    )
+                  ) ?? false;
+                  print(result);
+                  if(!result) return await Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => new Scaffold(
+                        appBar: AppBar(title: Text("Hi POP-UP ?!"),),
+                      )
+                    )
+                  );
+                },
+              )
+
+
+
             ],
           ),
         ),
@@ -330,4 +359,5 @@ class _MyAppState extends State<MyApp> {
     http.Response res = await http.get(url);
     return json.decode(res.body);
   }
+
 }

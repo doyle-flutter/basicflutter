@@ -1,30 +1,14 @@
 # basicflutter
 
 해당 Flutter 플러터 코드는 basicexpress( https://github.com/doyle-flutter/basicexpress )와 basicDjangoPython(https://github.com/doyle-flutter/basicDjangoPython) 의 서버 사이드와 함께 보셔야 합니다.
-`20년이내 모든 내용을 업로드하는 목표로 작업하고 있습니다, 초급 ~ 중급 대상이므로 고급이상의 코더분들에겐 코드 레벨이 조금 부족할 수 있으므로 관련 로직만 참고해주시면 될 것 같습니다.
+초급 ~ 중급 대상이므로 입문자인 경우 영상([유튜브](https://youtube.com/playlist?list=PLIKnSA4GMR4NXpNdCtJOL0BhWcxX_BBHJ))을 통해 먼저 보시면 좋습니다.
 모든 내용 안드로이드 및 아이폰(에뮬레이터 및 실제 기기)에서 동시에 적용/테스트 가능합니다.
-
-## 일정
- - 10/16~17 : Django 및 Express.js(Node.js)를 활용한 카카오 페이 직접 연동
- - 9/10 : 보조 서버를 활용
- - 8/27 : express Vue.js 페이지 WebView 활용
- - 8/26 : express multer를 이용한 영상 업로드 / 사진첩(영상) 활용
- - 8/23 : Streaming MP3 안드로이드 및 아이폰 테스트 완료
- - 8/21 : 안드로이드 포그라운드(foreground_service / notification background)
- - 8/20 : GraphQL HTTP(s) || GraphQL 패키지 사용 둘 다 적용 가능
- - 8/19 : GeoLocation 위치(IOS는 실제 기기에서만 가능하므로 가상 기기에서는 예외처리 구현)
- - 8/18 : webRTC(And : Chrome / IOS : Safari 일부 지원)
- - 8/17 : FCM 코드 배포
- - 8/15 : FCM And & IOS 과 채팅 적용 예정
- - 8/14 (1) : Local DB SharedPreferences & 카카오 로그인 적용(임시 구현)
- - 8/13 (2) : 카카오톡 로그인(토큰까지 구현 중) & WebView 적용
- - 8/13 (1) : Local notification 로직 및 Socket 채팅 알림으로 사용(채팅 페이지 및 메인 페이지에서 알림)
- - 8/12 (2) : 카메라 & 앨범 사용 및 다중 이미지 파일 업로드 구현(express multer 지원) 로직 분리 필요
- - 8/12 (1) : SQflite CRUD 구현
 
 ## 목록
  - [x] 서버 및 데이터베이스 연결 : Node.js(Express.js) - [서버 코드 바로가기](https://github.com/doyle-flutter/basicexpress)
  - [x] mysql CRUD 구현
+ - [x] Redis 직접 연결 - [Flutter Code](https://github.com/doyle-flutter/basicflutter/blob/master/lib/redisExample/redisSample.dart) / [설치 및 실행 for MAC](https://github.com/doyle-flutter/basicflutter/blob/master/lib/redisExample/redisSETUP.txt)
+ - [x] Redis + Node.js - [Flutter Code](예정) / [Node Code](https://github.com/doyle-flutter/basicexpress/blob/master/redisserver.js)
  - [x] Local DB : Sqflite CRUD
  - [x] Local DB : SharedPreferences & 카카오 로그인 토큰 사용
  - [x] socket.io를 통한 채팅 구현
@@ -42,6 +26,23 @@
  - [x] 오디오 또는 비디오 스트리밍 : MP3 안드로이드 및 아이폰 테스트 완료
  - [x] 예외 처리 : 일부
  - [x] Django 및 Express.js(Node.js)를 활용한 카카오 페이 직접 연동
- - [ ] 접속 대기 구현 : 메인 서버용(Node.js)를 통한 보조 서버(Flask) 활용. 단, 여기서 '보조'는 메인 서버의 기능을 보충하는 역할
- - [ ] ML 활용 (예정)
- - [ ] 배포 된 express 서버를 이용하여 마켓 출시(구글 및 애플) : 배포를 희망하는 플랫폼의 개발자 계정을 구매해주셔야 합니다
+
+## 일정
+ - 11/15 : Node.js + Redis DB 연결(Android & IOS 완료)
+ - 11/14 : Redis DB 직접 연결(IOS 테스트)
+ - 10/16~17 : Django 및 Express.js(Node.js)를 활용한 카카오 페이 직접 연동
+ - 9/10 : 보조 서버를 활용
+ - 8/27 : express Vue.js 페이지 WebView 활용
+ - 8/26 : express multer를 이용한 영상 업로드 / 사진첩(영상) 활용
+ - 8/23 : Streaming MP3 안드로이드 및 아이폰 테스트 완료
+ - 8/21 : 안드로이드 포그라운드(foreground_service / notification background)
+ - 8/20 : GraphQL HTTP(s) || GraphQL 패키지 사용 둘 다 적용 가능
+ - 8/19 : GeoLocation 위치(IOS는 실제 기기에서만 가능하므로 가상 기기에서는 예외처리 구현)
+ - 8/18 : webRTC(And : Chrome / IOS : Safari 일부 지원)
+ - 8/17 : FCM 코드 배포
+ - 8/15 : FCM And & IOS 과 채팅 적용 예정
+ - 8/14 (1) : Local DB SharedPreferences & 카카오 로그인 적용(임시 구현)
+ - 8/13 (2) : 카카오톡 로그인(토큰까지 구현 중) & WebView 적용
+ - 8/13 (1) : Local notification 로직 및 Socket 채팅 알림으로 사용(채팅 페이지 및 메인 페이지에서 알림)
+ - 8/12 (2) : 카메라 & 앨범 사용 및 다중 이미지 파일 업로드 구현(express multer 지원) 로직 분리 필요
+ - 8/12 (1) : SQflite CRUD 구현

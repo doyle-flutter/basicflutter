@@ -47,6 +47,7 @@ dependencies:
   image: ^2.1.14
   graphql_flutter: ^3.0.0
   url_audio_stream: ^1.0.0+3
+  get:
 
 
 dev_dependencies:
