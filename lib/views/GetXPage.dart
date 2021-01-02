@@ -1,6 +1,8 @@
+// main.dart
+//  - runApp(GetMaterialApp(home: GetXPage())); -> 수정
+
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' as GetX;
-// 전역으로 사용 될 Obx 를 좀 더 연관성 있게 사용하려면 as 를 통해 묶어주는 편이 좋습니다
+import 'package:get/get.dart' as GetX; // 전역으로 사용 될 Obx 를 좀 더 연관성 있게 사용하려면 as 를 통해 묶어주는 편이 좋습니다
 
 class GetXPage extends StatelessWidget {
 
