@@ -50,7 +50,7 @@ void main() async{
 
   // GetX
   // runApp(GetMaterialApp(home: GetXPage()));
-  runApp(GetMaterialApp(home: GetXHttpPage()));
+  runApp(GetMaterialApp(home: GetXHttpPage2()));
 }
 
 Future<void> maybeStartFGS() async {
