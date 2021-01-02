@@ -8,6 +8,7 @@ import 'package:basicflutter/providers/SQLProvider.dart';
 import 'package:basicflutter/providers/SocketProvider.dart';
 import 'package:basicflutter/repo/UserLocation.dart';
 import 'package:basicflutter/viewModels/LoginCheck.dart';
+import 'package:basicflutter/views/GetXHttpPage.dart';
 import 'package:basicflutter/views/GetXPage.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +49,8 @@ void main() async{
   // );
 
   // GetX
-  runApp(GetMaterialApp(home: GetXPage()));
+  // runApp(GetMaterialApp(home: GetXPage()));
+  runApp(GetMaterialApp(home: GetXHttpPage()));
 }
 
 Future<void> maybeStartFGS() async {
