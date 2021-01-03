@@ -49,8 +49,24 @@ void main() async{
   // );
 
   // GetX
-  // runApp(GetMaterialApp(home: GetXPage()));
-  runApp(GetMaterialApp(home: GetXHttpPage2()));
+  runApp(
+    GetMaterialApp(
+      // [ Navigator ]
+      // (1) Widget
+      home: GetXPage(),
+
+      // (2) Name
+      // initialRoute: '/',
+      // getPages: [
+      //   GetPage(name: '/', page: () => GetXPage()),
+      //   GetPage(
+      //    name: '/GetXHttpPage2',
+      //    page: () => GetXHttpPage2()
+      //   ),
+      // ],
+    )
+  );
+  // runApp(GetMaterialApp(home: GetXHttpPage2()));
 }
 
 Future<void> maybeStartFGS() async {

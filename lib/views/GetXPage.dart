@@ -1,7 +1,9 @@
 // main.dart
 //  - runApp(GetMaterialApp(home: GetXPage())); -> 수정
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' as GetX; // 전역으로 사용 될 Obx 를 좀 더 연관성 있게 사용하려면 as 를 통해 묶어주는 편이 좋습니다
+import 'package:get/get.dart' as GetX;
+
+import 'GetXHttpPage.dart'; // 전역으로 사용 될 Obx 를 좀 더 연관성 있게 사용하려면 as 를 통해 묶어주는 편이 좋습니다
 
 class GetXPage extends StatelessWidget {
 
@@ -14,6 +16,25 @@ class GetXPage extends StatelessWidget {
       appBar: AppBar(
         title: Text("GetX - State"),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.navigate_next),
+            onPressed: (){
+              // [ Navigator ]
+              // - push
+              // --- (1) Widget
+              GetX.Get.to(GetXHttpPage2());
+              // --- (2) Name
+              // GetX.Get.toNamed('/GetXHttpPage2');
+
+              // - replacement
+              // GetX.Get.off(GetXHttpPage2());
+
+              // - removeAll
+              // GetX.Get.offAll(GetXHttpPage2());
+            }
+          )
+        ],
       ),
       body: Center(
         // [GetX . 1]

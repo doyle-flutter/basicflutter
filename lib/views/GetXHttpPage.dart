@@ -48,6 +48,18 @@ class GetXHttpPage2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('GetXHttp'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.backspace),
+            onPressed: (){
+              // [ Navigator ]
+              GetX.Get.back();
+            }
+          )
+        ],
+      ),
       body: Center(
         child: GetX.Obx(() => Text(_getXController2.data.toString())),
       ),
