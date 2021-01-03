@@ -26,7 +26,7 @@
  - [x] 오디오 또는 비디오 스트리밍 : MP3 안드로이드 및 아이폰 테스트 완료
  - [x] 예외 처리 : 일부
  - [x] Django 및 Express.js(Node.js)를 활용한 카카오 페이 직접 연동
- - [x] GetX : [(1) State - Code](https://github.com/doyle-flutter/basicflutter/blob/master/lib/views/GetXPage.dart) / (2) Navigation - Code... / (3) [HTTP - Code](https://github.com/doyle-flutter/basicflutter/blob/master/lib/views/GetXHttpPage.dart) / (4) Socket.io - Code...
+ - [x] GetX : [(1) State - Code](https://github.com/doyle-flutter/basicflutter/blob/master/lib/views/GetXPage.dart) / (2) [Navigation - Code](https://github.com/doyle-flutter/basicflutter/blob/master/lib/main.dart) / (3) [HTTP - Code](https://github.com/doyle-flutter/basicflutter/blob/master/lib/views/GetXHttpPage.dart) / (4) Socket.io - Code...
 
 ## 일정
  - 11/15 : Node.js + Redis DB 연결(Android & IOS 완료)
