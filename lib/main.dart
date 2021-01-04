@@ -8,6 +8,7 @@ import 'package:basicflutter/providers/SQLProvider.dart';
 import 'package:basicflutter/providers/SocketProvider.dart';
 import 'package:basicflutter/repo/UserLocation.dart';
 import 'package:basicflutter/viewModels/LoginCheck.dart';
+import 'package:basicflutter/views/DartStock.dart';
 import 'package:basicflutter/views/GetXHttpPage.dart';
 import 'package:basicflutter/views/GetXPage.dart';
 import 'package:flutter/gestures.dart';
@@ -49,24 +50,27 @@ void main() async{
   // );
 
   // GetX
-  runApp(
-    GetMaterialApp(
-      // [ Navigator ]
-      // (1) Widget
-      home: GetXPage(),
-
-      // (2) Name
-      // initialRoute: '/',
-      // getPages: [
-      //   GetPage(name: '/', page: () => GetXPage()),
-      //   GetPage(
-      //    name: '/GetXHttpPage2',
-      //    page: () => GetXHttpPage2()
-      //   ),
-      // ],
-    )
-  );
+  // runApp(
+  //   GetMaterialApp(
+  //     // [ Navigator ]
+  //     // (1) Widget
+  //     home: GetXPage(),
+  //
+  //     // (2) Name
+  //     // initialRoute: '/',
+  //     // getPages: [
+  //     //   GetPage(name: '/', page: () => GetXPage()),
+  //     //   GetPage(
+  //     //    name: '/GetXHttpPage2',
+  //     //    page: () => GetXHttpPage2()
+  //     //   ),
+  //     // ],
+  //   )
+  // );
   // runApp(GetMaterialApp(home: GetXHttpPage2()));
+
+  // Project[전자 공시 시스템 / 입문자 기준]
+  runApp(MaterialApp(home: DartStock(),));
 }
 
 Future<void> maybeStartFGS() async {
