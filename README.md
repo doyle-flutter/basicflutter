@@ -27,6 +27,7 @@
  - [x] 예외 처리 : 일부
  - [x] Django 및 Express.js(Node.js)를 활용한 카카오 페이 직접 연동
  - [x] GetX : [(1) State - Code](https://github.com/doyle-flutter/basicflutter/blob/master/lib/views/GetXPage.dart) / (2) [Navigation - Code](https://github.com/doyle-flutter/basicflutter/blob/master/lib/main.dart) / (3) [HTTP - Code](https://github.com/doyle-flutter/basicflutter/blob/master/lib/views/GetXHttpPage.dart) / (4) Socket.io - Code...
+ - [x] Custom Page Route Animation, Custom Dialog PopUP [Code](https://github.com/doyle-flutter/flutterPlatformAll/blob/main/lib/pages/views/customRouteAnimAndPopUp.dart)
 
 ## Project
  - 전자 공시 시스템 : 최근 3개월 공시 기업 내용 조회 어플( 입문자 [Code](https://github.com/doyle-flutter/basicflutter/blob/master/lib/views/DartStock.dart) )
